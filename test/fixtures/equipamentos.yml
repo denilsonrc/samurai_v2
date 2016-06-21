@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  mac: MyString
+  ip: MyString
+  status: MyString
+  sala_id: 
+  tipo_id: 
+
+two:
+  nome: MyString
+  mac: MyString
+  ip: MyString
+  status: MyString
+  sala_id: 
+  tipo_id: 
