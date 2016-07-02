@@ -26,7 +26,7 @@
                 <% else %>
                   <p><strong>Status: </strong>Sem registro</p>
                 <% end %>
-                <p><strong>Tipo: </strong><%= e.tipo.nome %></p>
+                <p><strong>Tipo: </strong><%= e.tipo.nome if !e.tipo.nil? %></p>
               </div>
             <% end %>
           <% end %>

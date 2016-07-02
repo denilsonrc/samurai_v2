@@ -29,6 +29,7 @@ gem 'googlecharts'
 gem 'chartkick'
 gem 'jquery-ui-rails'
 gem 'snmp'
+gem 'brazilian-rails'
 
 gem 'daemons-rails', '~> 1.2', '>= 1.2.1'
 gem 'daemons', '~> 1.2', '>= 1.2.3'
