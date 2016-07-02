@@ -23,6 +23,8 @@
                 <h3><%= e.nome %></h3> 
                 <% if !e.historico_equipamentos.last.nil? %>
                   <p><strong>Status: </strong><%= e.historico_equipamentos.last.status %></p>
+                <% else %>
+                  <p><strong>Status: </strong>Sem registro</p>
                 <% end %>
                 <p><strong>Tipo: </strong><%= e.tipo.nome %></p>
               </div>

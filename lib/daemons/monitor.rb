@@ -31,6 +31,7 @@ def ping(host)
 end
 
 while($running) do
+  valor_snmp = "Sem registro"
   Equipamento.all.map { |e|
     if e.protocolo == "PING"
       tmp = Time.now
@@ -41,9 +42,20 @@ while($running) do
     	end
       tmp_resp = ((Time.now - tmp) * 1000).round(4)
     elsif e.protocolo == "SNMP"
-      
-    end  
-  	HistoricoEquipamento.create(:equipamento_id=>e.id,:status=>status, :sala_id=>e.sala_id, :tempo=>tmp_resp)
+      tmp = Time.now
+      SNMP::Manager.open(:host => e.ip) do |manager|
+        response = manager.get(["sysDescr.0", "sysName.0"])
+        response.each_varbind do |vb|
+          valor_snmp = vb.value.to_s
+        end
+      end
+      tmp_resp = ((Time.now - tmp) * 1000).round(4)
+    end 
+  	if e.protocolo == "SNMP"
+      HistoricoEquipamento.create(:equipamento_id=>e.id,:sala_id=>e.sala_id,:valor=>valor_snmp,:tempo=>tmp_resp)
+    else
+      HistoricoEquipamento.create(:equipamento_id=>e.id,:status=>status, :sala_id=>e.sala_id, :tempo=>tmp_resp)
+    end
   }
   sleep 30
 end

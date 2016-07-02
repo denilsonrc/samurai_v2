@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160519225508) do
   create_table "historico_equipamentos", force: :cascade do |t|
     t.string   "status"
     t.float    "tempo"
+    t.string   "valor"
     t.integer  "equipamento_id"
     t.integer  "sala_id"
     t.datetime "created_at",     null: false
