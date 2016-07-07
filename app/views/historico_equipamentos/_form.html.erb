@@ -1,0 +1,29 @@
+<%= form_for(@historico_equipamento) do |f| %>
+  <% if @historico_equipamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@historico_equipamento.errors.count, "error") %> prohibited this historico_equipamento from being saved:</h2>
+
+      <ul>
+      <% @historico_equipamento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :tempo %><br>
+    <%= f.text_field :tempo %>
+  </div>
+  <div class="field">
+    <%= f.label :dado %><br>
+    <%= f.text_field :dado %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

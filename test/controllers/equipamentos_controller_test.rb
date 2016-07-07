@@ -18,7 +18,7 @@ class EquipamentosControllerTest < ActionController::TestCase
 
   test "should create equipamento" do
     assert_difference('Equipamento.count') do
-      post :create, equipamento: { ip: @equipamento.ip, mac: @equipamento.mac, nome: @equipamento.nome, sala_id: @equipamento.sala_id, status: @equipamento.status, tipo_id: @equipamento.tipo_id }
+      post :create, equipamento: { descricao: @equipamento.descricao, ip: @equipamento.ip, nome: @equipamento.nome, status: @equipamento.status }
     end
 
     assert_redirected_to equipamento_path(assigns(:equipamento))
@@ -35,7 +35,7 @@ class EquipamentosControllerTest < ActionController::TestCase
   end
 
   test "should update equipamento" do
-    patch :update, id: @equipamento, equipamento: { ip: @equipamento.ip, mac: @equipamento.mac, nome: @equipamento.nome, sala_id: @equipamento.sala_id, status: @equipamento.status, tipo_id: @equipamento.tipo_id }
+    patch :update, id: @equipamento, equipamento: { descricao: @equipamento.descricao, ip: @equipamento.ip, nome: @equipamento.nome, status: @equipamento.status }
     assert_redirected_to equipamento_path(assigns(:equipamento))
   end
 

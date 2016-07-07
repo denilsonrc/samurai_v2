@@ -1,12 +1,12 @@
-class TipoController < ApplicationController
-  before_action :set_equipamento, only: [:show, :edit, :update, :destroy]
+class TiposController < ApplicationController
+  before_action :set_tipo, only: [:show, :edit, :update, :destroy]
 
   # GET /tipos
   # GET /tipos.json
   def index
     @tipos = Tipo.all
   end
-  
+
   # GET /tipos/1
   # GET /tipos/1.json
   def show
@@ -17,20 +17,20 @@ class TipoController < ApplicationController
     @tipo = Tipo.new
   end
 
-  # GET /Tipos/1/edit
+  # GET /tipos/1/edit
   def edit
   end
 
-  # POST /Tipos
-  # POST /Tipos.json
+  # POST /tipos
+  # POST /tipos.json
   def create
     @tipo = Tipo.new(tipo_params)
 
     respond_to do |format|
       if @tipo.save
-        #format.html { redirect_to @tipo, notice: 'tipo was successfully created.' }
+        #format.html { redirect_to @tipo, notice: 'Tipo was successfully created.' }
         #format.json { render :show, status: :created, location: @tipo }
-        format.html { redirect_to new_equipamento_path, notice: 'Tipo criado com sucesso.' }
+        format.html { redirect_to new_equipamento_path, notice: 'Tipo registrado com sucesso' }
       else
         format.html { render :new }
         format.json { render json: @tipo.errors, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class TipoController < ApplicationController
   def update
     respond_to do |format|
       if @tipo.update(tipo_params)
-        format.html { redirect_to @tipo, notice: 'Tipo atualizado com sucesso.' }
+        format.html { redirect_to @tipo, notice: 'Tipo was successfully updated.' }
         format.json { render :show, status: :ok, location: @tipo }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class TipoController < ApplicationController
   def destroy
     @tipo.destroy
     respond_to do |format|
-      format.html { redirect_to tipos_url, notice: 'Tipo excluido com sucesso.' }
+      format.html { redirect_to tipos_url, notice: 'Tipo was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,7 +70,6 @@ class TipoController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tipo_params
-      params.require(:equipamento).permit(:nome)
+      params.require(:tipo).permit(:nome)
     end
-
 end

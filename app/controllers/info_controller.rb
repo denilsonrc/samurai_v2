@@ -1,7 +1,7 @@
 class InfoController < ApplicationController
   def index
     @grafico_pizza = Hash[Tipo.all.map do |t|
-      [t.nome, t.equipamento.count]
+      [t.nome, t.equipamentos.count]
     end]
     @grafico_barras = Hash[Sala.all.map { |s| 
       numero = s.historico_equipamentos.count

@@ -3,9 +3,10 @@ class CreateHistoricoEquipamentos < ActiveRecord::Migration
     create_table :historico_equipamentos do |t|
       t.string :status
       t.float :tempo
-      t.string :valor
-      t.references :equipamento, index: true, foreign_key: true
-      t.references :sala, index: true, foreign_key: true
+      t.string :dado
+        
+      t.belongs_to :equipamento, index: true, foreign_key: true
+      t.belongs_to :sala, index: true, foreign_key: true
 
       t.timestamps null: false
     end

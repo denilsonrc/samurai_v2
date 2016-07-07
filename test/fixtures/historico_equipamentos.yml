@@ -2,10 +2,10 @@
 
 one:
   status: MyString
-  string,: MyString
-  equipamento_id: 
+  tempo: 1.5
+  dado: MyString
 
 two:
   status: MyString
-  string,: MyString
-  equipamento_id: 
+  tempo: 1.5
+  dado: MyString

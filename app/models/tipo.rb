@@ -1,3 +1,4 @@
 class Tipo < ActiveRecord::Base
-    has_many :equipamento
+    has_many :equipamentos
+    validates_presence_of :nome
 end

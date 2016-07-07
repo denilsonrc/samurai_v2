@@ -1,4 +1,4 @@
 json.array!(@equipamentos) do |equipamento|
-  json.extract! equipamento, :id, :nome, :mac, :ip, :status, :sala_id, :tipo_id
+  json.extract! equipamento, :id, :nome, :ip, :status, :descricao
   json.url equipamento_url(equipamento, format: :json)
 end

@@ -1,1 +1,1 @@
-json.extract! @equipamento, :id, :nome, :mac, :ip, :status, :sala_id, :tipo_id, :created_at, :updated_at
+json.extract! @equipamento, :id, :nome, :ip, :status, :descricao, :created_at, :updated_at

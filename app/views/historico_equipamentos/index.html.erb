@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Historico_equipamentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Tempo</th>
+      <th>Dado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @historico_equipamentos.each do |historico_equipamento| %>
+      <tr>
+        <td><%= historico_equipamento.status %></td>
+        <td><%= historico_equipamento.tempo %></td>
+        <td><%= historico_equipamento.dado %></td>
+        <td><%= link_to 'Show', historico_equipamento %></td>
+        <td><%= link_to 'Edit', edit_historico_equipamento_path(historico_equipamento) %></td>
+        <td><%= link_to 'Destroy', historico_equipamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Historico equipamento', new_historico_equipamento_path %>

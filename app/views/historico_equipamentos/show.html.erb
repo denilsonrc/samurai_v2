@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @historico_equipamento.status %>
+</p>
+
+<p>
+  <strong>Tempo:</strong>
+  <%= @historico_equipamento.tempo %>
+</p>
+
+<p>
+  <strong>Dado:</strong>
+  <%= @historico_equipamento.dado %>
+</p>
+
+<%= link_to 'Edit', edit_historico_equipamento_path(@historico_equipamento) %> |
+<%= link_to 'Back', historico_equipamentos_path %>

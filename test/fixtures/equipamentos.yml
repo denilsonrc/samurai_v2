@@ -2,16 +2,12 @@
 
 one:
   nome: MyString
-  mac: MyString
   ip: MyString
   status: MyString
-  sala_id: 
-  tipo_id: 
+  descricao: MyText
 
 two:
   nome: MyString
-  mac: MyString
   ip: MyString
   status: MyString
-  sala_id: 
-  tipo_id: 
+  descricao: MyText

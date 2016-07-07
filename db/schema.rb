@@ -11,28 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519225508) do
+ActiveRecord::Schema.define(version: 20160705112110) do
 
   create_table "equipamentos", force: :cascade do |t|
     t.string   "nome"
-    t.string   "mac"
     t.string   "ip"
     t.string   "status"
+    t.string   "no"
+    t.text     "descricao"
     t.integer  "sala_id"
     t.integer  "tipo_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text     "descricao"
-    t.string   "protocolo"
+    t.integer  "protocolo_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
+  add_index "equipamentos", ["protocolo_id"], name: "index_equipamentos_on_protocolo_id"
   add_index "equipamentos", ["sala_id"], name: "index_equipamentos_on_sala_id"
   add_index "equipamentos", ["tipo_id"], name: "index_equipamentos_on_tipo_id"
 
   create_table "historico_equipamentos", force: :cascade do |t|
     t.string   "status"
     t.float    "tempo"
-    t.string   "valor"
+    t.string   "dado"
     t.integer  "equipamento_id"
     t.integer  "sala_id"
     t.datetime "created_at",     null: false
@@ -41,6 +42,12 @@ ActiveRecord::Schema.define(version: 20160519225508) do
 
   add_index "historico_equipamentos", ["equipamento_id"], name: "index_historico_equipamentos_on_equipamento_id"
   add_index "historico_equipamentos", ["sala_id"], name: "index_historico_equipamentos_on_sala_id"
+
+  create_table "protocolos", force: :cascade do |t|
+    t.string   "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "salas", force: :cascade do |t|
     t.string   "nome"
