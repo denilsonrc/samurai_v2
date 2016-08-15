@@ -1,29 +1,46 @@
-<%= form_for(@sala) do |f| %>
+<div class="col-lg-11">
+  <%= form_for @sala, :html => { :class => "form-horizontal sala" } do |f| %>
+  
   <% if @sala.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sala.errors.count, "error") %> prohibited this sala from being saved:</h2>
-
-      <ul>
-      <% @sala.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@sala.errors.count, "error") %> prohibited this sala from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @sala.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <i class="fa fa-desktop fa-fw"></i> Formulario de salas
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+      <div class="container">
+        <div class="form-group col-sm-11 col-lg-10">
+            <%= f.label :nome, :class => 'control-label' %>
+            <%= f.text_field :nome, :class => 'form-control' %>
+          </div>
+          <div class="form-group col-sm-11 col-lg-10">
+            <%= f.label :numero, :class => 'control-label' %>
+            <%= f.text_field :numero, :class => 'form-control' %>
+          </div>
+          <div class="form-group col-sm-11 col-lg-10">
+            <%= f.label :andar, :class => 'control-label' %>
+            <%= f.text_field :andar, :class => 'form-control' %>
+          </div>
+          <div class="form-group col-lg-10">
+            <%= f.submit nil, :class => 'btn btn-primary' %>
+            <%= link_to "Cancelar", equipamentos_path, :class => 'btn btn-default' %>
+          </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :numero %><br>
-    <%= f.text_field :numero %>
-  </div>
-  <div class="field">
-    <%= f.label :andar %><br>
-    <%= f.text_field :andar %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <% end %>
+</div>

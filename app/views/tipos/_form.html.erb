@@ -1,21 +1,38 @@
-<%= form_for(@tipo) do |f| %>
+<div class="col-lg-11">
+  <%= form_for @tipo, :html => { :class => "form-horizontal tipo" } do |f| %>
+  
   <% if @tipo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tipo.errors.count, "error") %> prohibited this tipo from being saved:</h2>
-
-      <ul>
-      <% @tipo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@tipo.errors.count, "error") %> prohibited this tipo from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @tipo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <i class="fa fa-desktop fa-fw"></i> Formulario de tipos
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+      <div class="container">
+        <div class="form-group col-sm-11 col-lg-10">
+            <%= f.label :nome, :class => 'control-label' %>
+            <%= f.text_field :nome, :class => 'form-control' %>
+          </div>
+          <div class="form-group col-lg-10">
+            <%= f.submit nil, :class => 'btn btn-primary' %>
+            <%= link_to "Cancelar", equipamentos_path, :class => 'btn btn-default' %>
+          </div>
+      </div>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <% end %>
+</div>

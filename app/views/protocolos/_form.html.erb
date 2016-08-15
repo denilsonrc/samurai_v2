@@ -1,21 +1,34 @@
-<%= form_for(@protocolo) do |f| %>
-  <% if @protocolo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@protocolo.errors.count, "error") %> prohibited this protocolo from being saved:</h2>
+<%= form_for @protocolo, :html => { :class => "form-horizontal protocolo" } do |f| %>
 
-      <ul>
-      <% @protocolo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @protocolo.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@protocolo.errors.count, "error") %> prohibited this protocolo from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @protocolo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
+  <div class="form-group">
+    <%= f.label :nome, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :nome, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:nome) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                protocolos_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>
