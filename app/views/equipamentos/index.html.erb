@@ -9,7 +9,7 @@
       <th><%= model_class.human_attribute_name(:nome) %></th>
       <th><%= model_class.human_attribute_name(:ip) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:no) %></th>
+      <th><%#= model_class.human_attribute_name(:equipamento) %>Gateway</th>
       <th><%= model_class.human_attribute_name(:descricao) %></th>
       <th><%= model_class.human_attribute_name(:sala_id) %></th>
       <th><%= model_class.human_attribute_name(:tipo_id) %></th>
@@ -25,7 +25,7 @@
         <td><%= equipamento.nome %></td>
         <td><%= equipamento.ip %></td>
         <td><%= equipamento.status %></td>
-        <td><%= equipamento.no %></td>
+        <td><%= equipamento.equipamento.ip %></td>
         <td><%= equipamento.descricao %></td>
         <td><%= equipamento.sala_id %></td>
         <td><%= equipamento.tipo_id %></td>
