@@ -17,8 +17,8 @@ end
 while($running) do
   
   Equipamento.where(:equipamento=>nil).map{|e|
-    SNMP::Manager.open(:host => "localhost") do |manager|
-      manager.walk(["entPhySensorName", "entPhySensorIPv6", "entPhySensorStatus", "entPhySensorFunction"]) do |nome, ip, status, descricao|
+    SNMP::Manager.open(:host => e.ip) do |manager|
+      manager.walk(["entPhySensorName", "entPhySensorIPv6", "entPhySensorOperStatus", "entPhySensorFunction"]) do |nome, ip, status, descricao|
         if status == "ok"
           status = "ativo"
         end
