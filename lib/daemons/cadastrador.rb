@@ -17,6 +17,7 @@ end
 while($running) do
   
   Equipamento.where(:equipamento=>nil).map{|e|
+    ifTableColumns = ["entPhySensorName.#{count}", "entPhySensorIPv6LocalAddr.#{count}", "entPhySensorOperStatus.#{count}", "entPhySensorDescription.#{count}"]
     SNMP::Manager.open(:host => e.ip) do |manager|
       manager.walk(["entPhySensorName", "entPhySensorIPv6", "entPhySensorOperStatus", "entPhySensorFunction"]) do |nome, ip, status, descricao|
         if status == "ok"
