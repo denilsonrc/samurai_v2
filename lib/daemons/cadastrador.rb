@@ -15,18 +15,32 @@ Signal.trap("TERM") do
 end
 
 while($running) do
-  
-  Equipamento.where(:equipamento=>nil).map{|e|
-    ifTableColumns = ["entPhySensorName.#{count}", "entPhySensorIPv6LocalAddr.#{count}", "entPhySensorOperStatus.#{count}", "entPhySensorDescription.#{count}"]
+  Equipamento.where(:equipamento_id=>nil).map{|e|
+    ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.10", "1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.13"]
     SNMP::Manager.open(:host => e.ip) do |manager|
-      manager.walk(["entPhySensorName", "entPhySensorIPv6", "entPhySensorOperStatus", "entPhySensorFunction"]) do |nome, ip, status, descricao|
-        if status == "ok"
-          status = "ativo"
-        end
-        Equipamento.create(:nome=>nome,:ip=>ip,:status=>status,:descricao=>descricao,:equipamento=>e)
+      manager.walk(ifTableColumns) do |dados|
+        #if status == "ok"
+        #  status = "ativo"
+        #end
+        #Equipamento.create(:nome=>nome,:ip=>ip,:status=>status,:descricao=>descricao,:equipamento_id=>e.id)
       end
     end
   }
-  
-  sleep 10
 end
+
+#type "1.3.6.1.2.1.99.1.1.1.1.1"
+#Scale "1.3.6.1.2.1.99.1.1.1.2.1"
+#Precision "1.3.6.1.2.1.99.1.1.1.3.1"
+#Value "1.3.6.1.2.1.99.1.1.1.4.1"
+#OperStatus "1.3.6.1.2.1.99.1.1.1.5.1"
+#UnitsDisplay "1.3.6.1.2.1.99.1.1.1.6.1"
+#ValueTimesTamp "1.3.6.1.2.1.99.1.1.1.7.1"
+#ValueUpdateRate "1.3.6.1.2.1.99.1.1.1.8.1"
+#IPv6LocalAddr "1.3.6.1.2.1.99.1.1.1.9.1"
+#Name "1.3.6.1.2.1.99.1.1.1.10.1"
+#Function "1.3.6.1.2.1.99.1.1.1.11.1"
+#Pin "1.3.6.1.2.1.99.1.1.1.12.1"
+#Description "1.3.6.1.2.1.99.1.1.1.13.1"
+#Location "1.3.6.1.2.1.99.1.1.1.14.1"
+
+#mudar ultimo numero referente a linha da tabela
