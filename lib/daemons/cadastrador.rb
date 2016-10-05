@@ -19,10 +19,11 @@ while($running) do
     ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.10", "1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.13"]
     SNMP::Manager.open(:host => e.ip) do |manager|
       manager.walk(ifTableColumns) do |dados|
-        #if status == "ok"
-        #  status = "ativo"
-        #end
-        #Equipamento.create(:nome=>nome,:ip=>ip,:status=>status,:descricao=>descricao,:equipamento_id=>e.id)
+        aux = []
+        dados.each { |vb| 
+          aux << "#{vb.value}" 
+        }
+        Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>aux[2],:descricao=>aux[3])
       end
     end
   }
