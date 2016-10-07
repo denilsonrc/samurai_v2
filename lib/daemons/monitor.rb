@@ -52,7 +52,7 @@ while($running) do
             aux << "#{vb.value}" 
           }
           tmp_resp = ((Time.now - tmp) * 1000).round(4)
-          equipamento = Equipamento.find(aux[0])
+          equipamento = Equipamento.where(:ip=>aux[0]).first
           HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>aux[1],:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
         end
       end

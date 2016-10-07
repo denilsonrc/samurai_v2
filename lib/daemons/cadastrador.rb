@@ -26,14 +26,15 @@ while($running) do
         begin
           sala = Sala.where(:nome=>aux[4]).first
           if aux[2] == 0
-            status = "Ativo"
-          elsif aux[2] == 1
             status = "Desligado"
+          elsif aux[2] == 1
+            status = "Ativo"
           else
             status = "Sem registro"
           end
-          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>status,:descricao=>aux[3],:computador_id=>e.id,:sala_id=>sala.id,:protocolo_id=>2)
-        rescue
+          puts aux
+          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>status,:descricao=>aux[3],:equipamento_id=>e.id,:sala_id=>sala.id,:protocolo_id=>2)
+        rescue 
         end
       end
     end

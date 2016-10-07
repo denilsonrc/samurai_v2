@@ -4,6 +4,6 @@ class Equipamento < ActiveRecord::Base
     belongs_to :tipo
     belongs_to :protocolo
     belongs_to :equipamento
-    validates_presence_of :nome, :ip, :protocolo, :sala, :tipo
+    validates_presence_of :nome, :ip, :protocolo, :sala
     validates_uniqueness_of :ip, :message=>"ja cadastrado"
 end
