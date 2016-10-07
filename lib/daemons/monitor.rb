@@ -43,6 +43,7 @@ while($running) do
       tmp_resp = ((Time.now - tmp) * 1000).round(4)
     elsif e.protocolo.nome == "SNMP"
       tmp = Time.now
+      puts e.protocolo.nome
       SNMP::Manager.open(:host => e.ip) do |manager|
         response = manager.get(["sysDescr.0", "sysName.0"])
         response.each_varbind do |vb|

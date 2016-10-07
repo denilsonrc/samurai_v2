@@ -3,5 +3,5 @@ class Equipamento < ActiveRecord::Base
     belongs_to :sala
     belongs_to :tipo
     belongs_to :protocolo
-    validates_presence_of :nome, :ip, :protocolo, :sala, :tipo
+    #validates_presence_of :nome, :ip, :protocolo, :sala, :tipo
 end
