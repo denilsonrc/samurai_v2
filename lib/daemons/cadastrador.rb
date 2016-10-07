@@ -23,7 +23,11 @@ while($running) do
         dados.each { |vb| 
           aux << "#{vb.value}" 
         }
-        Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>aux[2],:descricao=>aux[3])
+        #cadastrar com protocolo snmp e a sala do item location
+        begin
+          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>aux[2],:descricao=>aux[3],:computador_id=>e.id)
+        rescue
+        end
       end
     end
   }
