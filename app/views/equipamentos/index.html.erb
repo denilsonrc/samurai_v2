@@ -25,11 +25,11 @@
         <td><%= equipamento.nome %></td>
         <td><%= equipamento.ip %></td>
         <td><%= equipamento.status %></td>
-        <td><%= equipamento.equipamento.ip %></td>
+        <td><%= equipamento.equipamento.ip if !equipamento.equipamento.nil? %></td>
         <td><%= equipamento.descricao %></td>
-        <td><%= equipamento.sala_id %></td>
-        <td><%= equipamento.tipo_id %></td>
-        <td><%= equipamento.protocolo_id %></td>
+        <td><%= equipamento.sala.nome if !equipamento.sala.nil? %></td>
+        <td><%= equipamento.tipo.nome if !equipamento.tipo.nil? %></td>
+        <td><%= equipamento.protocolo.nome if !equipamento.protocolo.nil? %></td>
         <td><%=l equipamento.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

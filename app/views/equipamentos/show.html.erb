@@ -11,7 +11,7 @@
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
   <dd><%= @equipamento.status %></dd>
   <dt><strong><%#= model_class.human_attribute_name(:no) %> Gateway:</strong></dt>
-  <dd><%= @equipamento.equipamento.ip %></dd>
+  <dd><%= @equipamento.equipamento.ip if !@equipamento.equipamento.nil? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:descricao) %>:</strong></dt>
   <dd><%= @equipamento.descricao %></dd>
   <dt><strong><%= model_class.human_attribute_name(:sala_id) %>:</strong></dt>

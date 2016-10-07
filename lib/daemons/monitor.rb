@@ -31,7 +31,6 @@ def ping(host)
 end
 
 while($running) do
-  dado_snmp = "Sem registro"
   Equipamento.all.map { |e|
     if e.protocolo.nome == "PING"
       tmp = Time.now
@@ -41,22 +40,23 @@ while($running) do
     		status="desligado"
     	end
       tmp_resp = ((Time.now - tmp) * 1000).round(4)
+      HistoricoEquipamento.create(:equipamento_id=>e.id,:status=>status, :sala_id=>e.sala_id, :tempo=>tmp_resp)
     elsif e.protocolo.nome == "SNMP"
+      ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.4"]
       tmp = Time.now
       puts e.protocolo.nome
       SNMP::Manager.open(:host => e.ip) do |manager|
-        response = manager.get(["sysDescr.0", "sysName.0"])
-        response.each_varbind do |vb|
-          dado_snmp = vb.value.to_s
+        manager.walk(ifTableColumns) do |dados|
+          aux = []
+          dados.each { |vb| 
+            aux << "#{vb.value}" 
+          }
+          tmp_resp = ((Time.now - tmp) * 1000).round(4)
+          equipamento = Equipamento.find(aux[0])
+          HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>aux[1],:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
         end
       end
-      tmp_resp = ((Time.now - tmp) * 1000).round(4)
     end 
-  	if e.protocolo.nome == "SNMP"
-      HistoricoEquipamento.create(:equipamento_id=>e.id,:sala_id=>e.sala_id,:dado=>dado_snmp,:tempo=>tmp_resp)
-    else
-      HistoricoEquipamento.create(:equipamento_id=>e.id,:status=>status, :sala_id=>e.sala_id, :tempo=>tmp_resp)
-    end
   }
   sleep 30
 end

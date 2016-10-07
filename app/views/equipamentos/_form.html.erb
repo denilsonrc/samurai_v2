@@ -1,65 +1,64 @@
 <div class="col-lg-11">
   <%= form_for @equipamento, :html => { :class => "form-horizontal equipamento" } do |f| %>
   
-  <% if @equipamento.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
+    <% if @equipamento.errors.any? %>
+      <div id="error_expl" class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= pluralize(@equipamento.errors.count, "error") %> prohibited this equipamento from being saved:</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+          <% @equipamento.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  
+    <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@equipamento.errors.count, "error") %> prohibited this equipamento from being saved:</h3>
+        <i class="fa fa-desktop fa-fw"></i> Formulario de equipamentos
       </div>
+      <!-- /.panel-heading -->
       <div class="panel-body">
-        <ul>
-        <% @equipamento.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
+        <div class="container">
+          <div class="form-group col-sm-11 col-lg-10">
+              <%= f.label :nome, :class => 'control-label' %>
+              <%= f.text_field :nome, :class => 'form-control' %>
+            </div>
+            <div class="form-group col-sm-11 col-lg-10">
+              <%= f.label :ip, :class => 'control-label' %>
+              <%= f.text_field :ip, :class => 'form-control' %>
+            </div>
+            <div class="form-group col-sm-11 col-lg-10">
+              <%= f.label :protocolo, :class => 'control-label' %>
+              <%= select(:equipamento, :protocolo_id, Protocolo.all.collect {|p| [ p.nome, p.id ] }, {prompt: 'Selecione o protocolo'}, :class=>'form-control') %>
+            </div>
+            <div class="form-group col-lg-10">
+              <%= f.label :sala_id, :class => 'control-label' %>
+              <%= select(:equipamento, :sala_id, Sala.all.collect {|s| [ s.nome, s.id ] }, {prompt: 'Selecione a sala'}, :class=>'form-control') %>
+            </div>
+            <div class="form-group col-lg-10">
+              <%= link_to "Adicionar sala", new_sala_path, :class => 'btn btn-success' %>
+            </div>
+            <div class="form-group col-lg-10">
+              <%= f.label :tipo_id, :class => 'control-label' %>
+              <%= select(:equipamento, :tipo_id, Tipo.all.collect {|t| [ t.nome, t.id ] }, {prompt: 'Selecione o tipo'}, :class=>'form-control') %>
+            </div>
+            <div class="form-group col-lg-10">
+              <%= link_to "Adicionar tipo", new_tipo_path, :class => 'btn btn-success' %>
+            </div>
+            <div class="form-group col-lg-10">
+              <%= f.label :descricao, :class => 'control-label' %>
+              <%= f.text_area :descricao, :class => 'form-control' %>
+            </div>
+            <div class="form-group col-lg-10">
+              <%= f.submit nil, :class => 'btn btn-primary' %>
+              <%= link_to "Cancelar", equipamentos_path, :class => 'btn btn-default' %>
+            </div>
+        </div>
       </div>
     </div>
-  <% end %>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <i class="fa fa-desktop fa-fw"></i> Formulario de equipamentos
-    </div>
-    <!-- /.panel-heading -->
-    <div class="panel-body">
-      <div class="container">
-        <div class="form-group col-sm-11 col-lg-10">
-            <%= f.label :nome, :class => 'control-label' %>
-            <%= f.text_field :nome, :class => 'form-control' %>
-          </div>
-          <div class="form-group col-sm-11 col-lg-10">
-            <%= f.label :ip, :class => 'control-label' %>
-            <%= f.text_field :ip, :class => 'form-control' %>
-          </div>
-          <div class="form-group col-sm-11 col-lg-10">
-            <%= f.label :protocolo, :class => 'control-label' %>
-            <%#= f.text_field :protocolo, :class => 'form-control' %>
-            <%= select(:equipamento, :protocolo_id, Protocolo.all.collect {|p| [ p.nome, p.id ] }, {prompt: 'Selecione o protocolo'}, :class=>'form-control') %>
-          </div>
-          <div class="form-group col-lg-10">
-            <%= f.label :sala_id, :class => 'control-label' %>
-            <%= select(:equipamento, :sala_id, Sala.all.collect {|s| [ s.nome, s.id ] }, {prompt: 'Selecione a sala'}, :class=>'form-control') %>
-          </div>
-          <div class="form-group col-lg-10">
-            <%= link_to "Adicionar sala", new_sala_path, :class => 'btn btn-success' %>
-          </div>
-          <div class="form-group col-lg-10">
-            <%= f.label :tipo_id, :class => 'control-label' %>
-            <%= select(:equipamento, :tipo_id, Tipo.all.collect {|t| [ t.nome, t.id ] }, {prompt: 'Selecione o tipo'}, :class=>'form-control') %>
-          </div>
-          <div class="form-group col-lg-10">
-            <%= link_to "Adicionar tipo", new_tipo_path, :class => 'btn btn-success' %>
-          </div>
-          <div class="form-group col-lg-10">
-            <%= f.label :descricao, :class => 'control-label' %>
-            <%= f.text_area :descricao, :class => 'form-control' %>
-          </div>
-          <div class="form-group col-lg-10">
-            <%= f.submit nil, :class => 'btn btn-primary' %>
-            <%= link_to "Cancelar", equipamentos_path, :class => 'btn btn-default' %>
-          </div>
-      </div>
-    </div>
-  </div>
   <% end %>
 </div>
