@@ -31,7 +31,7 @@ def ping(host)
 end
 
 while($running) do
-  Equipamento.all.map { |e|
+  Equipamento.where(:equipamento_id=>nil).map { |e|
     if e.protocolo.nome == "PING"
       tmp = Time.now
     	if ping(e.ip)
@@ -51,9 +51,16 @@ while($running) do
           dados.each { |vb| 
             aux << "#{vb.value}" 
           }
+          if aux[1] == "0"
+            status = "Desligado"
+          elsif aux[1] == "1"
+            status = "Ativo"
+          else
+            status = "Sem registro"
+          end
           tmp_resp = ((Time.now - tmp) * 1000).round(4)
           equipamento = Equipamento.where(:ip=>aux[0]).first
-          HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>aux[1],:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
+          HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>status,:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
         end
       end
     end 
