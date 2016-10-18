@@ -50,8 +50,16 @@ while($running) do
           dados.each { |vb| 
             aux << "#{vb.value}" 
           }
+          if aux[1] == 0
+            status = "Ativo"
+          elsif aux[1] == 1
+            status = "Desligado"
+          else
+            status = "Sem registro"
+          end
           tmp_resp = ((Time.now - tmp) * 1000).round(4)
-          equipamento = Equipamento.find(aux[0])
+          equipamento = Equipamento.where(ip: aux[0])
+          equipamento.update(:status=>status)
           HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>aux[1],:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
         end
       end

@@ -16,7 +16,7 @@ end
 
 while($running) do
   Equipamento.where(:equipamento_id=>nil).map{|e|
-    ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.10", "1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.13", "1.3.6.1.2.1.99.1.1.1.14"]
+    ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.10", "1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.13", "1.3.6.1.2.1.99.1.1.1.14", "1.3.6.1.2.1.99.1.1.1.1"]
     SNMP::Manager.open(:host => e.ip) do |manager|
       manager.walk(ifTableColumns) do |dados|
         aux = []
@@ -32,7 +32,8 @@ while($running) do
           else
             status = "Sem registro"
           end
-          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>status,:descricao=>aux[3],:computador_id=>e.id,:sala_id=>sala.id,:protocolo_id=>2)
+          tipo = Tipo.find(aux[5])
+          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>status,:descricao=>aux[3],:computador_id=>e.id,:sala_id=>sala.id,:protocolo_id=>2,:tipo_id=>tipo.id)
         rescue
         end
       end
