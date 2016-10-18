@@ -26,9 +26,9 @@ while($running) do
         begin
           sala = Sala.where(:nome=>aux[4]).first
           if aux[2] == 0
-            status = "Ativo"
-          elsif aux[2] == 1
             status = "Desligado"
+          elsif aux[2] == 1
+            status = "Ativo"
           else
             status = "Sem registro"
           end

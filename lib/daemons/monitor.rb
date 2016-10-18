@@ -31,7 +31,7 @@ def ping(host)
 end
 
 while($running) do
-  Equipamento.all.map { |e|
+  Equipamento.where(:equipamento_id=>nil).map { |e|
     if e.protocolo.nome == "PING"
       tmp = Time.now
     	if ping(e.ip)
@@ -44,21 +44,22 @@ while($running) do
     elsif e.protocolo.nome == "SNMP"
       ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.4"]
       tmp = Time.now
+      puts e.protocolo.nome
       SNMP::Manager.open(:host => e.ip) do |manager|
         manager.walk(ifTableColumns) do |dados|
           aux = []
           dados.each { |vb| 
             aux << "#{vb.value}" 
           }
-          if aux[1] == 0
-            status = "Ativo"
-          elsif aux[1] == 1
+          if aux[1] == "0"
             status = "Desligado"
+          elsif aux[1] == "1"
+            status = "Ativo"
           else
             status = "Sem registro"
           end
           tmp_resp = ((Time.now - tmp) * 1000).round(4)
-          equipamento = Equipamento.where(ip: aux[0])
+          equipamento = Equipamento.where(ip: aux[0]).first
           equipamento.update(:status=>status)
           HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>aux[1],:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
         end
