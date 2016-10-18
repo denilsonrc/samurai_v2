@@ -33,7 +33,8 @@ while($running) do
             status = "Sem registro"
           end
           tipo = Tipo.find(aux[5])
-          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>status,:descricao=>aux[3],:computador_id=>e.id,:sala_id=>sala.id,:protocolo_id=>2,:tipo_id=>tipo.id)
+          descricao = "#{tipo.nome} sensor"
+          Equipamento.create(:nome=>aux[0],:ip=>aux[1],:status=>status,:descricao=>descricao,:equipamento_id=>e.id,:sala_id=>sala.id,:protocolo_id=>2,:tipo_id=>tipo.id)
         rescue
         end
       end
