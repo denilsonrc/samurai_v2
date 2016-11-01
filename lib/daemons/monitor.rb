@@ -44,7 +44,6 @@ while($running) do
     elsif e.protocolo.nome == "SNMP"
       ifTableColumns = ["1.3.6.1.2.1.99.1.1.1.9", "1.3.6.1.2.1.99.1.1.1.5", "1.3.6.1.2.1.99.1.1.1.4"]
       tmp = Time.now
-      puts e.protocolo.nome
       SNMP::Manager.open(:host => e.ip) do |manager|
         manager.walk(ifTableColumns) do |dados|
           aux = []
@@ -65,6 +64,8 @@ while($running) do
             HistoricoEquipamento.create(:equipamento_id=>equipamento.id,:status=>status,:sala_id=>equipamento.sala_id,:dado=>aux[2],:tempo=>tmp_resp)
           end
         end
+        tmp_resp = ((Time.now - tmp) * 1000).round(4)
+        HistoricoEquipamento.create(:equipamento_id=>e.id,:status=>"Ativo",:sala_id=>e.sala_id,:tempo=>tmp_resp)
       end
     end 
   }
